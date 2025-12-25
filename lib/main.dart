@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:on_campus/screens/First_Screen/first_screen.dart';
+// import 'package:on_campus/screens/First_Screen/first_screen.dart';
 // import 'package:on_campus/Screens/First_Screen/first_screen.dart';
 import 'package:on_campus/screens/Home/homepage.dart';
 
