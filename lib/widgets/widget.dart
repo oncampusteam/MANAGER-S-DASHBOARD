@@ -308,6 +308,53 @@ Widget buildPaymentItem(
 //     ),
 //   );
 // }
+Widget imagesCard({
+  required String imagePath,
+  required double width,
+  required double height,
+  required String imageCount,
+}) {
+  return GestureDetector(
+    onTap: () {},
+    child: Container(
+      // padding: EdgeInsets.symmetric(horizontal: 20.w),
+      height: height,
+      width: width,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.r)),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(12.r),
+            child: SizedBox(
+              width: width,
+              height: height,
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: const Color.fromRGBO(0, 0, 0, 0.05),
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: text(
+              content: "+$imageCount",
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.bold,
+              fontSize: 12.sp,
+              textColor: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
 
 Widget u101({required String imagePath, required String description}) {
   return Row(
