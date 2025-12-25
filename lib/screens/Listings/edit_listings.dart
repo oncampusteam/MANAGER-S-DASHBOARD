@@ -241,7 +241,7 @@ class _EditlistingsState extends State<Editlistings> {
                                   color: Color(0xFFF0F2F5),
                                 ),
                                 child: Align(
-                                  child: Container(
+                                  child: SizedBox(
                                     height: Constant.height * 0.028,
                                     width: Constant.width * 0.13,
                                     child: FittedBox(

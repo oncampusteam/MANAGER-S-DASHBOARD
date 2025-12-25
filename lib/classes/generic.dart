@@ -5,8 +5,9 @@ class GenericRoomDetails {
   // bool amenities_ = false;
   // bool bills_ = false;
   // bool security_ = false;
-  List<Map<String, String>> detailsList;
+  List<Map<String, String>> detailsList = <Map<String, String>>[];
   RoomDetailsType detailsType;
+  List<Map<String, String>> buildListUsed = [];
 
   List<Map<String, String>> buildList = [
     {
@@ -176,21 +177,56 @@ class GenericRoomDetails {
       "label": "Well/Borehole",
     },
   ];
+
+  List<Map<String, String>> houseRulesBuildList = [
+    {
+      "ImagePath": "assets/Screens/Property/Amenities/no_smoking.png",
+      "label": "No Smoking",
+    },
+    {
+      "ImagePath": "assets/Screens/Property/Amenities/no_pets.png",
+      "label": "No Pets Allowed",
+    },
+    {
+      "ImagePath": "assets/Screens/Property/Amenities/no_parties.png",
+      "label": "No Parties",
+    },
+    {
+      "ImagePath": "assets/Screens/Property/Amenities/quiet_hours.png",
+      "label": "Quiet Hours",
+    },
+    {
+      "ImagePath": "assets/Screens/Property/Amenities/guests_policy.png",
+      "label": "Guests Policy",
+    },
+  ];
+  GenericRoomDetails.empty()
+    : detailsList = [],
+      detailsType = RoomDetailsType.amenities;
+
   GenericRoomDetails({required this.detailsList, required this.detailsType}) {
     if (detailsType == RoomDetailsType.amenities) {
+      buildListUsed = amenityBuildList;
       bools = List.generate(amenityBuildList.length, (index) {
         return false;
       });
     } else if (detailsType == RoomDetailsType.bills) {
+      buildListUsed = billsBuildList;
       bools = List.generate(billsBuildList.length, (index) {
         return false;
       });
     } else if (detailsType == RoomDetailsType.security) {
+      buildListUsed = buildList;
       bools = List.generate(buildList.length, (index) {
+        return false;
+      });
+    } else if (detailsType == RoomDetailsType.houseRules) {
+      buildListUsed = houseRulesBuildList;
+      bools = List.generate(houseRulesBuildList.length, (index) {
         return false;
       });
     }
   }
 }
 
-enum RoomDetailsType { amenities, bills, security }
+enum RoomDetailsType { amenities, bills, security, houseRules }

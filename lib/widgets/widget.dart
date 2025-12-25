@@ -2,9 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:on_campus/classes/constants.dart';
+import 'package:on_campus/classes/generic.dart';
 import 'package:on_campus/screens/Payment/payment.dart' as payment;
 import 'package:on_campus/widgets/barchart.dart';
 import 'package:on_campus/widgets/lineChart.dart';
+import 'package:on_campus/widgets/scroll_sheet.dart';
 
 Widget text({
   String content = "",
@@ -308,6 +310,158 @@ Widget buildPaymentItem(
 //     ),
 //   );
 // }
+
+Widget galleryImageCard({
+  required String imagePath,
+  required double width,
+  required double height,
+  required String imageCount,
+  required String galleryTag,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      imagesCard(
+        imagePath: imagePath,
+        width: width,
+        height: height,
+        imageCount: imageCount,
+      ),
+      SizedBox(height: Constant.height * 0.005),
+      SizedBox(
+        // color: Colors.brown,
+        height: Constant.height * 0.03,
+        child: FittedBox(
+          child: text(
+            content: galleryTag,
+            fontFamily: "Inter",
+            fontWeight: FontWeight.w500,
+            fontSize: 12.sp,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget pullUp(
+  GenericRoomDetails detailsType,
+  double animatedHeight,
+  BuildContext context,
+) {
+  String label() {
+    if (detailsType.detailsType == RoomDetailsType.amenities) {
+      return "Amenities";
+    } else if (detailsType.detailsType == RoomDetailsType.bills) {
+      return "Bills";
+    } else if (detailsType.detailsType == RoomDetailsType.security) {
+      return "Security";
+    } else if (detailsType.detailsType == RoomDetailsType.houseRules) {
+      return "House Rules";
+    } else {
+      return "";
+    }
+  }
+
+  return Positioned(
+    bottom: 0,
+    left: 0,
+    right: 0,
+    child: AnimatedContainer(
+      height: animatedHeight,
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.linear,
+      decoration: BoxDecoration(
+        color: const Color(0xFFFEFEFE),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.r),
+          topRight: Radius.circular(15.r),
+        ),
+      ),
+      child: ScrollSheet(
+        title: label(),
+        scrollHeight: MediaQuery.of(context).size.height * 0.81,
+        buildList: detailsType.buildListUsed,
+        typeList: detailsType.detailsList,
+        type: detailsType.bools,
+        enlargeDontCare: false,
+      ),
+    ),
+  );
+}
+
+Widget roomDetails({
+  required VoidCallback onAmenityTap,
+  required GenericRoomDetails detailsType,
+  required bool detailBool,
+}) {
+  String label() {
+    if (detailsType.detailsType == RoomDetailsType.amenities) {
+      return "Amenities";
+    } else if (detailsType.detailsType == RoomDetailsType.bills) {
+      return "Bills";
+    } else if (detailsType.detailsType == RoomDetailsType.security) {
+      return "Security";
+    } else if (detailsType.detailsType == RoomDetailsType.houseRules) {
+      return "House Rules";
+    } else {
+      return "";
+    }
+  }
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(
+        // margin: EdgeInsets.symmetric(horizontal: Constant.generalPadding),
+        child: SizedBox(
+          height: Constant.height * 0.037,
+          child: FittedBox(
+            child: Text(
+              label(),
+              style: TextStyle(fontSize: 20.sp, fontFamily: "Roboto-Medium"),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(height: Constant.height * 0.008),
+      detailBool
+          ? ShowAmenities(
+              typeList: detailsType.detailsList,
+              onTap: onAmenityTap,
+            )
+          : GestureDetector(
+              onTap: onAmenityTap,
+              child: SizedBox(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/Screens/Property/Amenities/ic_add.png",
+                      width: Constant.width * 0.05,
+                      height: 24.h,
+                    ),
+                    SizedBox(width: 10.h),
+                    SizedBox(
+                      height: Constant.height * 0.025,
+                      child: FittedBox(
+                        child: Text(
+                          "Add",
+                          style: TextStyle(
+                            fontFamily: "Work Sans",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+    ],
+  );
+}
+
 Widget imagesCard({
   required String imagePath,
   required double width,
