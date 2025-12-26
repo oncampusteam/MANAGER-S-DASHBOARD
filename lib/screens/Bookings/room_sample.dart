@@ -223,9 +223,7 @@ class _RoomSampleState extends State<RoomSample> {
           width: MediaQuery.of(context).size.width * .9,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              roomCard()
-            ],
+            children: [roomCard()],
           ),
         ),
       ),
@@ -233,6 +231,101 @@ class _RoomSampleState extends State<RoomSample> {
   }
 
   Widget roomCard() {
-    return Container();
+    return Container(
+      height: 127,
+      padding: EdgeInsets.symmetric(horizontal: 17, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 10,
+            offset: Offset(2, 2), // x, y
+          ),
+        ],
+      ),
+      child: Row(
+        spacing: 15,
+        children: [
+          Container(
+            width: 88,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: HexColor('F1F1F1'),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Room 406',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: HexColor('111111'),
+                  ),
+                ),
+
+                SizedBox(height: 8),
+
+                Text(
+                  'Available From: May 2025',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: HexColor('333333'),
+                  ),
+                ),
+
+                SizedBox(height: 8),
+
+                Text(
+                  'Wifi • Air conditioning • Kitchen• Parking • Balcony..',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: HexColor('6B6F7B'),
+                    fontFamily: 'Roboto',
+                    fontSize: 10,
+                  ),
+                ),
+
+                SizedBox(height: 8),
+
+                IntrinsicWidth(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                    decoration: BoxDecoration(color: HexColor('FFE1E1'), borderRadius: BorderRadius.circular(100)),
+                    child: Center(
+                      child: Text(
+                        'Full',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 8,
+                          color: HexColor('FF3636'),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+             
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    RichText(text: TextSpan(text: 'GHS 3,000', style: TextStyle(
+                      fontFamily: ''
+                    )))
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
