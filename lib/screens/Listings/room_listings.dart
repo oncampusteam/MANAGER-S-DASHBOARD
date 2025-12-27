@@ -453,6 +453,7 @@ class _RoomCardListState extends State<RoomCardList> {
                     statusBackgroundColor: all[index].statusBackgroundColor,
                     status: all[index].status,
                     statusTextColor: all[index].statusTextColor,
+                    price: all[index].price,
                   );
                 },
               ),
@@ -471,6 +472,7 @@ class _RoomCardListState extends State<RoomCardList> {
     required Color statusBackgroundColor,
     required String status,
     required Color statusTextColor,
+    required String price,
   }) {
     return Container(
       height: Constant.height * 0.16,
@@ -478,7 +480,6 @@ class _RoomCardListState extends State<RoomCardList> {
       padding: EdgeInsets.symmetric(horizontal: Constant.width * 0.025),
       width: Constant.width,
       decoration: BoxDecoration(
-        border: Border.all(),
         borderRadius: BorderRadius.circular(15.r),
         color: Colors.white,
         boxShadow: [
@@ -501,8 +502,8 @@ class _RoomCardListState extends State<RoomCardList> {
               child: Image.asset(imagePath, fit: BoxFit.fitHeight),
             ),
           ),
-          Container(
-            color: Colors.red,
+          SizedBox(
+            // color: Colors.red,
             height: Constant.height * 0.14,
             width: Constant.width * 0.61,
             child: Column(
@@ -547,16 +548,17 @@ class _RoomCardListState extends State<RoomCardList> {
                     textAlign: TextAlign.left,
                   ),
                 ),
+                SizedBox(height: Constant.height * 0.01),
                 Container(
-                  height: Constant.height * 0.02,
-                  width: Constant.width * 0.25,
+                  height: Constant.height * 0.025,
+                  width: Constant.width * 0.18,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
                     color: statusBackgroundColor,
                   ),
                   child: Align(
                     child: SizedBox(
-                      height: Constant.height * 0.01,
+                      height: Constant.height * 0.015,
                       child: FittedBox(
                         child: text(
                           content: status,
@@ -564,6 +566,40 @@ class _RoomCardListState extends State<RoomCardList> {
                           fontFamily: "Roboto",
                           fontWeight: FontWeight.normal,
                           fontSize: 8.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: SizedBox(
+                      // color: Colors.blue,
+                      height: Constant.height * 0.025,
+                      width: Constant.width * 0.2,
+                      child: FittedBox(
+                        alignment: Alignment.bottomCenter,
+                        child: RichText(
+                          text: TextSpan(
+                            text: "GH₵ $price",
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13.sp,
+                              color: Colors.black,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: "/year",
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 10.sp,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
