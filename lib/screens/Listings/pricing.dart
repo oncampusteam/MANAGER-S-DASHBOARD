@@ -15,29 +15,38 @@ class _PricingState extends State<Pricing> {
   TextEditingController selfContained = TextEditingController();
   TextEditingController fourInARoom = TextEditingController();
 
+  FocusNode oneInARoomFocusNode = FocusNode();
+  FocusNode selfContainedFocusNode = FocusNode();
+  FocusNode fourInARoomFocusNode = FocusNode();
+
   int oneInARoomCounter = 0;
   int selfContainedCounter = 0;
   int fourInARoomCounter = 0;
 
-  @override 
-  void initState(){
+  @override
+  void initState() {
     super.initState();
     oneInARoom.addListener(_update);
   }
-  void _update(){
-    if(oneInARoom.text.isNotEmpty){
-      
-      if(int.parse(oneInARoom.text).isNaN){
+
+  void _update() {
+    if (oneInARoom.text.isNotEmpty) {
+      if (int.tryParse(oneInARoom.text) != null) {
         oneInARoom.clear();
       }
       oneInARoomCounter = int.parse(oneInARoom.text);
     }
-    if(selfContained.text.isNotEmpty){
-      
-      if(int.parse(selfContained.text).isNaN){
+    if (selfContained.text.isNotEmpty) {
+      if (int.parse(selfContained.text).isNaN) {
         selfContained.clear();
       }
-      selfContainedCounter = int.parse(oneInARoom.text);
+      selfContainedCounter = int.parse(selfContained.text);
+    }
+    if (fourInARoom.text.isNotEmpty) {
+      if (int.parse(fourInARoom.text).isNaN) {
+        fourInARoom.clear();
+      }
+      fourInARoomCounter = int.parse(fourInARoom.text);
     }
   }
 
@@ -120,6 +129,7 @@ class _PricingState extends State<Pricing> {
                               SizedBox(
                                 width: Constant.width * 0.5,
                                 child: TextField(
+                                  focusNode: oneInARoomFocusNode,
                                   style: TextStyle(
                                     fontFamily: "Outfit",
                                     fontWeight: FontWeight.w500,
@@ -156,9 +166,13 @@ class _PricingState extends State<Pricing> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     GestureDetector(
-                                      onTap: (){
+                                      onTap: () {
                                         setState(() {
-                                          oneInARoom.text.toI
+                                          if (oneInARoomFocusNode.hasFocus) {
+                                            oneInARoom.text =
+                                                (oneInARoomCounter++)
+                                                    .toString();
+                                          }
                                         });
                                       },
                                       child: SizedBox(

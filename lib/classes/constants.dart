@@ -8,4 +8,5 @@ class Constant {
   static double generalWhiteSpace = height * 0.03;
   static double generalPaddingVertical = height * 0.02;
   static Color primaryColor = const Color(0xFF00EFD1);
+  static double h1height = height * 0.03;
 }

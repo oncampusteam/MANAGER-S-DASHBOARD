@@ -28,9 +28,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Material(
+    return Material(
+      child: PopScope(
+        canPop: false,
         child: SafeArea(
           child: Stack(
             children: [

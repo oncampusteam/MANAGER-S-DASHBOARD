@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:on_campus/classes/constants.dart';
 import 'package:on_campus/screens/Listings/edit_listings.dart';
+import 'package:on_campus/screens/Listings/pricing.dart';
 import 'package:on_campus/screens/Listings/room_listings.dart';
 import 'package:on_campus/widgets/widget.dart';
 
@@ -667,13 +668,18 @@ class _HostelOwnerDashboardState extends State<HostelOwnerDashboard> {
                   ),
                 ),
                 SizedBox(height: Constant.height * 0.015),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: Constant.generalPadding,
-                  ),
-                  child: u101(
-                    imagePath: "assets/Screens/Home/Listings/pricing.png",
-                    description: "Pricing",
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => Pricing());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Constant.generalPadding,
+                    ),
+                    child: u101(
+                      imagePath: "assets/Screens/Home/Listings/pricing.png",
+                      description: "Pricing",
+                    ),
                   ),
                 ),
                 SizedBox(height: Constant.height * 0.02),

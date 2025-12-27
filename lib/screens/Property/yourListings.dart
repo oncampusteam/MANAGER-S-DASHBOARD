@@ -11,11 +11,10 @@ class YourListings extends StatefulWidget {
 class _YourListingsState extends State<YourListings> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: Placeholder(),
-        bottomNavigationBar: BottomNav(),
-      )
-      );
+    return Material(
+      child: const SafeArea(
+        child: Scaffold(body: Placeholder(), bottomNavigationBar: BottomNav()),
+      ),
+    );
   }
 }
