@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:on_campus/classes/constants.dart';
 import 'package:on_campus/classes/hostel.dart';
+import 'package:on_campus/screens/Listings/add_room.dart';
 import 'package:on_campus/widgets/widget.dart';
 
 class RoomListings extends StatefulWidget {
@@ -108,25 +110,32 @@ class _RoomListingsState extends State<RoomListings> {
                   MaterialPageRoute(builder: (context) => const RoomListings()),
                 );
               },
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Constant.width * 0.03,
-                ),
-                height: Constant.height * 0.037,
-                decoration: BoxDecoration(
-                  color: Constant.primaryColor,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Align(
-                  child: SizedBox(
-                    height: Constant.height * 0.018,
-                    child: FittedBox(
-                      child: text(
-                        content: "Add New Room",
-                        fontSize: 15.sp,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.bold,
-                        textColor: Color(0xFFFFFFFF),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    Get.to(() => AddRoom());
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Constant.width * 0.03,
+                  ),
+                  height: Constant.height * 0.037,
+                  decoration: BoxDecoration(
+                    color: Constant.primaryColor,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Align(
+                    child: SizedBox(
+                      height: Constant.height * 0.018,
+                      child: FittedBox(
+                        child: text(
+                          content: "Add New Room",
+                          fontSize: 15.sp,
+                          fontFamily: "Inter",
+                          fontWeight: FontWeight.bold,
+                          textColor: Color(0xFFFFFFFF),
+                        ),
                       ),
                     ),
                   ),

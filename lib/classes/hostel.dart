@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
 class Room {
@@ -36,4 +37,13 @@ class Room {
       statusTextColor = Color(0xFF001529);
     }
   }
+}
+
+class PricingClass {
+  String roomType = "";
+  TextEditingController controller = TextEditingController();
+  int counter = 0;
+  FocusNode focusNode = FocusNode();
+
+  PricingClass({required this.roomType});
 }
