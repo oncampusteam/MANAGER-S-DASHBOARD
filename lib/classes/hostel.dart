@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/string_extensions.dart';
+// import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
 class Room {
   String roomNumber;

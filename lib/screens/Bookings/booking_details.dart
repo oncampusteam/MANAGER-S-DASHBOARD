@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_controller.dart';
+// import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -134,11 +134,11 @@ class _BookingDetailsState extends State<BookingDetails> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: items.asMap().entries.map((entry) {
                 return GestureDetector(
-                  onTap: () => _controller?.animateToPage(entry.key),
+                  onTap: () => _controller.animateToPage(entry.key),
                   child: Container(
                     width: _current == entry.key ? 10 : 10.0,
                     height: 10,
-                    
+
                     margin: EdgeInsets.symmetric(
                       vertical: 8.0,
                       horizontal: 4.0,

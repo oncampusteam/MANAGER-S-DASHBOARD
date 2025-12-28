@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:on_campus/classes/constants.dart';
@@ -21,149 +22,158 @@ class _ListingsState extends State<Listings> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: !homepage.inProgress.value
+            ? Colors.white
+            : const Color.fromRGBO(0, 0, 0, 0.5),
+        statusBarIconBrightness: Brightness.dark,
+      ),
       child: Stack(
         children: [
-          Scaffold(
-            appBar: AppBar(
-              actionsPadding: EdgeInsets.only(right: Constant.width * 0.035),
-              automaticallyImplyLeading: false,
-              title: SizedBox(
-                height: Constant.height * 0.04,
-                child: FittedBox(
-                  child: text(
-                    content: "Your Listings",
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "OUtfit",
-                  ),
-                ),
-              ),
-              actions: [
-                GestureDetector(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: Constant.width * 0.08,
-                    height: Constant.height * 0.04,
-                    // padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color.fromRGBO(158, 158, 158, 0.2),
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: Color.fromRGBO(17, 17, 17, 0.6),
-                      size: 20,
+          SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                actionsPadding: EdgeInsets.only(right: Constant.width * 0.035),
+                automaticallyImplyLeading: false,
+                title: SizedBox(
+                  height: Constant.height * 0.04,
+                  child: FittedBox(
+                    child: text(
+                      content: "Your Listings",
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "OUtfit",
                     ),
                   ),
                 ),
-                GestureDetector(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: Constant.width * 0.03,
-                    ),
-                    width: Constant.width * 0.08,
-                    height: Constant.height * 0.04,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color.fromRGBO(158, 158, 158, 0.2),
+                actions: [
+                  GestureDetector(
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: Constant.width * 0.08,
+                      height: Constant.height * 0.04,
+                      // padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color.fromRGBO(158, 158, 158, 0.2),
+                        ),
                       ),
-                    ),
-                    child: Image.asset(
-                      "assets/Screens/Home/Bookings/search.png",
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  child: Container(
-                    width: Constant.width * 0.08,
-                    height: Constant.height * 0.04,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color.fromRGBO(158, 158, 158, 0.2),
-                      ),
-                    ),
-                    child: Image.asset(
-                      "assets/Screens/Home/Bookings/calender.png",
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    // color: Colors.orange,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: Constant.generalPadding,
-                    ),
-                    child: Divider(
-                      color: const Color.fromRGBO(158, 158, 158, 0.2),
-                    ),
-                  ),
-                  hostelCard(
-                    hostelName: "Albert-Acquah Hall",
-                    location: "University of Ghana, Legon, Accra",
-                    status: "Verification required",
-                    tag: "Mixed",
-                    statusColor: Colors.grey,
-                    imagePath: "assets/Screens/Home/Listings/Asir.png",
-                  ),
-                  SizedBox(height: Constant.generalWhiteSpace),
-                  hostelCard(
-                    hostelName: "Albert-Acquah Hall",
-                    location: "University of Ghana, Legon, Accra",
-                    status: "In Progress",
-                    tag: "Mixed",
-                    statusColor: Colors.greenAccent,
-                    imagePath: "assets/Screens/Home/Listings/Asir.png",
-                  ),
-                  SizedBox(height: Constant.height * 0.015),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Constant.generalPadding * 2,
-                    ),
-                    child: FittedBox(
-                      child: text(
-                        content: "Your listing was created on May 17, 2025",
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w600,
-                        // fontSize: 13.sp,
-                        textColor: Colors.black,
+                      child: Icon(
+                        Icons.add,
+                        color: Color.fromRGBO(17, 17, 17, 0.6),
+                        size: 20,
                       ),
                     ),
                   ),
-                  SizedBox(height: Constant.generalWhiteSpace),
-                  SizedBox(
-                    // padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    height: (280.h) * itemCount,
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: itemCount,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.symmetric(vertical: 20.h),
-                          child: hostelCard(
-                            hostelName: "Joemat luxury hostel",
-                            location: "University of Ghana, Legon, Accra",
-                            tag: "Females Only",
-                            statusVisibility: false,
-                            imagePath: "assets/Screens/Home/Listings/Asir.png",
-                          ),
-                        );
-                      },
+                  GestureDetector(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: Constant.width * 0.03,
+                      ),
+                      width: Constant.width * 0.08,
+                      height: Constant.height * 0.04,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color.fromRGBO(158, 158, 158, 0.2),
+                        ),
+                      ),
+                      child: Image.asset(
+                        "assets/Screens/Home/Bookings/search.png",
+                      ),
                     ),
                   ),
-                  SizedBox(height: 150.h),
+                  GestureDetector(
+                    child: Container(
+                      width: Constant.width * 0.08,
+                      height: Constant.height * 0.04,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color.fromRGBO(158, 158, 158, 0.2),
+                        ),
+                      ),
+                      child: Image.asset(
+                        "assets/Screens/Home/Bookings/calender.png",
+                      ),
+                    ),
+                  ),
                 ],
+              ),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      // color: Colors.orange,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: Constant.generalPadding,
+                      ),
+                      child: Divider(
+                        color: const Color.fromRGBO(158, 158, 158, 0.2),
+                      ),
+                    ),
+                    hostelCard(
+                      hostelName: "Albert-Acquah Hall",
+                      location: "University of Ghana, Legon, Accra",
+                      status: "Verification required",
+                      tag: "Mixed",
+                      statusColor: Colors.grey,
+                      imagePath: "assets/Screens/Home/Listings/Asir.png",
+                    ),
+                    SizedBox(height: Constant.generalWhiteSpace),
+                    hostelCard(
+                      hostelName: "Albert-Acquah Hall",
+                      location: "University of Ghana, Legon, Accra",
+                      status: "In Progress",
+                      tag: "Mixed",
+                      statusColor: Colors.greenAccent,
+                      imagePath: "assets/Screens/Home/Listings/Asir.png",
+                    ),
+                    SizedBox(height: Constant.height * 0.015),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Constant.generalPadding * 2,
+                      ),
+                      child: FittedBox(
+                        child: text(
+                          content: "Your listing was created on May 17, 2025",
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w600,
+                          // fontSize: 13.sp,
+                          textColor: Colors.black,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: Constant.generalWhiteSpace),
+                    SizedBox(
+                      // padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      height: (280.h) * itemCount,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: itemCount,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.symmetric(vertical: 20.h),
+                            child: hostelCard(
+                              hostelName: "Joemat luxury hostel",
+                              location: "University of Ghana, Legon, Accra",
+                              tag: "Females Only",
+                              statusVisibility: false,
+                              imagePath:
+                                  "assets/Screens/Home/Listings/Asir.png",
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 150.h),
+                  ],
+                ),
               ),
             ),
           ),

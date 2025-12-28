@@ -235,82 +235,6 @@ Widget buildPaymentItem(
   );
 }
 
-// Widget buildPieChartCard() {
-//   final List<ChartData> chartData = [
-//     ChartData('1 in a room', 50),
-//     ChartData('4 in a room', 30),
-//     ChartData('2 in a room', 15),
-//     ChartData('Other', 5),
-//   ];
-//   return Card(
-//     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-//     child: Padding(
-//       padding: const EdgeInsets.all(20.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           const Text(
-//             'Rooms allocated',
-//             style: TextStyle(fontSize: 16, color: Colors.grey),
-//           ),
-//           const SizedBox(height: 5),
-//           const Text(
-//             '60% this year',
-//             style: TextStyle(fontSize: 14, color: Colors.green),
-//           ),
-//           const SizedBox(height: 20),
-//           SizedBox(
-//             height: 200,
-//             child: SfCircularChart(
-//               series: <CircularSeries>[
-//                 DoughnutSeries<ChartData, String>(
-//                   dataSource: chartData,
-//                   pointColorMapper: (ChartData data, _) {
-//                     switch (data.x) {
-//                       case '1 in a room':
-//                         return Colors.yellow.shade200;
-//                       case '4 in a room':
-//                         return Colors.teal.shade200;
-//                       case '2 in a room':
-//                         return Colors.red.shade200;
-//                       default:
-//                         return Colors.grey.shade200;
-//                     }
-//                   },
-//                   xValueMapper: (ChartData data, _) => data.x,
-//                   yValueMapper: (ChartData data, _) => data.y,
-//                   innerRadius: '80%',
-//                   explode: true,
-//                   explodeIndex: 0,
-//                   dataLabelSettings: const DataLabelSettings(
-//                     borderRadius: 12,
-//                     isVisible: false,
-//                     labelPosition: ChartDataLabelPosition.inside,
-//                   ),
-//                 )
-//               ],
-//               annotations: <CircularChartAnnotation>[
-//                 CircularChartAnnotation(
-//                   widget: Text(
-//                     '50%',
-//                     style: TextStyle(
-//                       color: Colors.yellow.shade800,
-//                       fontSize: 24,
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           const SizedBox(height: 20),
-//           buildLegendRow(),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
 Widget galleryImageCard({
   required String imagePath,
   required double width,
@@ -387,6 +311,270 @@ Widget pullUp(
         enlargeDontCare: false,
       ),
     ),
+  );
+}
+
+Widget animatedSheet({
+  required BuildContext context,
+  required bool add,
+  required VoidCallback topButtonTap,
+  required VoidCallback bottomButtonTap,
+  required String topButtonText,
+  required String bottomButtonText,
+  required String h1,
+  required String h2,
+}) {
+  return Positioned(
+    bottom: 0,
+    left: 0,
+    right: 0,
+    child: AnimatedContainer(
+      padding: EdgeInsets.symmetric(
+        horizontal: Constant.generalPadding,
+        vertical: Constant.generalPaddingVertical,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30.r),
+      ),
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeIn,
+      height: add ? Constant.height * 0.5 : 0,
+      width: MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: Constant.height * 0.005),
+            SizedBox(height: Constant.generalWhiteSpace / 2),
+            Container(
+              padding: EdgeInsets.all(5),
+              // color: Colors.blue,
+              width: Constant.width,
+              height: Constant.height * 0.15,
+              child: Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: Constant.width * 0.3,
+                  child: Image.asset(
+                    "assets/Screens/Home/Listings/created.png",
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: Constant.height * 0.03,
+              margin: EdgeInsets.symmetric(
+                horizontal: Constant.generalPadding * 2,
+              ),
+              child: FittedBox(
+                child: Text(
+                  h1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF000000),
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: Constant.height * 0.01),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: Constant.generalPadding * 2,
+              ),
+              height: Constant.height * 0.045,
+              child: FittedBox(
+                child: Text(
+                  h2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF000000),
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: Constant.generalWhiteSpace + Constant.height * 0.01,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: Constant.generalPadding),
+              width: Constant.width,
+              height: Constant.height * 0.05,
+              decoration: BoxDecoration(
+                color: Constant.primaryColor,
+                borderRadius: BorderRadius.circular(14.r),
+              ),
+              child: Align(
+                child: SizedBox(
+                  height: Constant.height * 0.025,
+                  child: FittedBox(
+                    child: text(
+                      content: topButtonText,
+                      fontSize: 15.sp,
+                      fontFamily: "Outfit",
+                      fontWeight: FontWeight.w600,
+                      textColor: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: Constant.height * 0.02),
+            GestureDetector(
+              onTap: bottomButtonTap,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: Constant.generalPadding,
+                ),
+                width: Constant.width,
+                height: Constant.height * 0.05,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14.r),
+                  border: Border.all(color: Color(0xFF00EFD1)),
+                ),
+                child: Align(
+                  child: SizedBox(
+                    height: Constant.height * 0.025,
+                    child: FittedBox(
+                      child: text(
+                        content: bottomButtonText,
+                        fontSize: 15.sp,
+                        fontFamily: "Outfit",
+                        fontWeight: FontWeight.w600,
+                        textColor: const Color(0xFF00EFD1),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget newRoomField({
+  required String fieldName,
+  required TextEditingController controller,
+  required String hintText,
+  bool dropDown = false,
+  bool variant = false,
+  String imagePath = "",
+  double height = 0,
+  double width = 0,
+}) {
+  return Column(
+    children: [
+      SizedBox(height: Constant.height * 0.015),
+      SizedBox(
+        height: Constant.height * 0.03,
+        width: Constant.width,
+        child: FittedBox(
+          alignment: Alignment.centerLeft,
+          child: text(
+            content: fieldName,
+            fontFamily: "Outfit",
+            fontWeight: FontWeight.w500,
+            textColor: Color(0xFF01070F),
+          ),
+        ),
+      ),
+      SizedBox(height: Constant.height * 0.01),
+      SizedBox(
+        height: Constant.height * 0.06,
+        child: Stack(
+          children: [
+            Container(
+              width: Constant.width,
+              height: Constant.height * 0.06,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                color: Color(0xFFB0B0B0),
+              ),
+              foregroundDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                color: Color(0xFFF7F7F7),
+              ),
+              child: Container(),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Constant.width * 0.05,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: Constant.width * 0.5,
+                      child: TextField(
+                        // focusNode: price.focusNode,
+                        style: TextStyle(
+                          fontFamily: "Outfit",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: Colors.black,
+                        ),
+                        controller: controller,
+                        cursorColor: Colors.black,
+                        cursorHeight: Constant.height * 0.02,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hint: SizedBox(
+                            height: Constant.height * 0.03,
+                            child: FittedBox(
+                              alignment: Alignment.bottomLeft,
+                              child: text(
+                                content: hintText,
+                                textColor: Color(0xFFB7B8BA),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Outfit",
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (dropDown == true)
+                      Builder(
+                        builder: (context) {
+                          if (!variant) {
+                            return Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.black,
+                              size: 24,
+                            );
+                          } else {
+                            return SizedBox(
+                              height: height,
+                              width: width,
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.contain,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
   );
 }
 
